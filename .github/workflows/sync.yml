@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: setup
         run: |
-          DEBIAN_FRONTEND=noninteractive apt update
-          DEBIAN_FRONTEND=noninteractive apt install rclone
+          sudo apt update
+          sudo apt install -y rclone
 
       - name: rclone sync
         run: |
