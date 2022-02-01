@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: setup
         run: |
-          sudo apt update
-          sudo apt install -y rclone
+          curl https://rclone.org/install.sh | sudo bash
 
       - name: rclone sync
         run: |
