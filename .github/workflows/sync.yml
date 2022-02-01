@@ -10,6 +10,11 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: setup
+        run: |
+          DEBIAN_FRONTEND=noninteractive apt update
+          DEBIAN_FRONTEND=noninteractive apt install rclone
+
       - name: rclone sync
         run: |
           mkdir -p ~/.config/rclone
