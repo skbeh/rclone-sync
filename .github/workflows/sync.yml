@@ -20,4 +20,4 @@ jobs:
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
           rclone sync ${{ secrets.ONEDRIVE_ORIGIN }} ${{ secrets.ONEDRIVE_BACKUP1 }}
 
-      - uses: gautamkrishnar/keepalive-workflow@master
+      - uses: gautamkrishnar/keepalive-workflow@1.0.7
