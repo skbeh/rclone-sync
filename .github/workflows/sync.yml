@@ -10,10 +10,10 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: setup
+      - name: Setup
         run: curl https://rclone.org/install.sh | sudo bash
 
-      - name: rclone sync
+      - name: Rclone sync
         run: |
           mkdir -p ~/.config/rclone
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
