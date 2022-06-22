@@ -11,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: setup
-        run: |
-          curl https://rclone.org/install.sh | sudo bash
+        run: curl https://rclone.org/install.sh | sudo bash
 
       - name: rclone sync
         run: |
@@ -20,6 +19,7 @@ jobs:
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
           rclone sync ${{ secrets.ONEDRIVE_ORIGIN }} ${{ secrets.ONEDRIVE_BACKUP1 }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: gautamkrishnar/keepalive-workflow@master
+
