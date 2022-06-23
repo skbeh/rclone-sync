@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: 0 2 * * *
 
+concurrency:
+  group: environment
+
 jobs:
   sync:
     runs-on: ubuntu-latest
