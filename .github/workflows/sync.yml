@@ -20,9 +20,8 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
-          rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:
-          rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP2 }}:${{ secrets.ONEDRIVE_ORIGIN }}
-          rclone sync ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP2 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
+          rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
+          rclone sync ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
 
       - uses: actions/checkout@v3
 
