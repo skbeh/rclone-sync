@@ -23,7 +23,10 @@ jobs:
           rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
           rclone sync ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
 
-      - uses: actions/checkout@v3
-
-      - uses: gautamkrishnar/keepalive-workflow@master
-
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@v1
