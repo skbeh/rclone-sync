@@ -20,13 +20,13 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
-          rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
-          rclone sync --exclude='/Personal Vault/**' ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
+          rclone sync --onedrive-delta --fast-list ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
+          rclone sync --onedrive-delta --fast-list --exclude='/Personal Vault/**' ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
 
       - name: Update rclone configuration
-        run: gh secret set RCLONE_CONF < ~/.config/rclone/rclone.conf
+        run: gh secret set RCLONE_CONF --repo '${{ github.repository }}' < ~/.config/rclone/rclone.conf
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_SECRET_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACTION_SECRET_TOKEN }}
 
   workflow-keepalive:
     if: github.event_name == 'schedule'
