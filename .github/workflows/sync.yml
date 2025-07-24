@@ -21,7 +21,7 @@ jobs:
           mkdir -p ~/.config/rclone
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
           rclone sync ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
-          rclone sync ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
+          rclone sync --exclude='/Personal Vault/**' ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
 
       - name: Update rclone configuration
         run: gh secret set RCLONE_CONF < ~/.config/rclone/rclone.conf
