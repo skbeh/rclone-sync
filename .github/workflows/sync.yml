@@ -20,8 +20,13 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
-          rclone sync --onedrive-delta --fast-list ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
-          rclone sync --onedrive-delta --fast-list --exclude='/Personal Vault/**' ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
+          rclone sync --onedrive-delta --fast-list --drive-chunk-size 128M ${{ secrets.ONEDRIVE_ORIGIN }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN }}
+          rclone sync --onedrive-delta --fast-list --drive-chunk-size 128M --exclude='/Personal Vault/**' ${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}: ${{ secrets.ONEDRIVE_BACKUP1 }}:${{ secrets.ONEDRIVE_ORIGIN_PERSONAL }}
+        env:
+          RCLONE_USER_AGENT: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0'
+          RCLONE_CHECKERS: 16
+          RCLONE_BUFFER_SIZE: 4G
+          RCLONE_MAX_BACKLOG: -1
 
       - name: Update rclone configuration
         run: gh secret set RCLONE_CONF --repo '${{ github.repository }}' < ~/.config/rclone/rclone.conf
