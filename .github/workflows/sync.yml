@@ -26,7 +26,7 @@ jobs:
           RCLONE_USER_AGENT: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0'
           RCLONE_CHECKERS: 16
           RCLONE_BUFFER_SIZE: 4G
-          RCLONE_MAX_BACKLOG: -1
+          RCLONE_CHECK_FIRST: 1
 
       - name: Update rclone configuration
         run: gh secret set RCLONE_CONF --repo '${{ github.repository }}' < ~/.config/rclone/rclone.conf
